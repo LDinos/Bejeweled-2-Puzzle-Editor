@@ -1,4 +1,5 @@
  = LDinos Puzzle Editor V2.0 =
+Github link: https://github.com/LDinos/Bejeweled-2-Puzzle-Editor
 
 This is the renewed and remastered puzzle editor for Bejeweled 2. It now supports .sol hint editing!
 Later versions might have more automated hint solution creations (such as a simulated board or making solutions in a click)
@@ -34,3 +35,12 @@ You can also make a new galaxy folder, but that is a bit more advanced and I don
 - You don't have to make two hint arrows for one swap (the game knows that the move 1 -> 2 is the same as 1 <- 2)
 - Please save somewhere in your own folders and NOT in the Bejeweled 2 folder, as permissions are very strict in Popcap Games
 - Please, for the love of god, if you are making changes to an existing puzzle, MAKE BACKUPS FIRST!
+
+
+Have fun and be creative!
+By LDinos,
+Youtube: https://www.youtube.com/channel/UCQYPI0C8qZPQ1uA9-xw1VBg
+Discord: LDinos#6531
+
+Feeling generous? Feel free to support me with donations!
+https://www.paypal.com/paypalme/LDinos
