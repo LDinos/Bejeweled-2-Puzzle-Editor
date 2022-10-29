@@ -1,6 +1,7 @@
 /// @description
-event_inherited()
+//event_inherited()
 
+audio_play_sound(snd_butt_click2,0,false)
 if (obj_butt_state.state_index != -1) {
 	array_delete(obj_butt_state.states_array, obj_butt_state.state_index, 1)
 	var l = array_length(obj_butt_state.states_array)

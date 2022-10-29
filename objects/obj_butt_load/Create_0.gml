@@ -4,8 +4,9 @@ image_xscale = 1.5
 
 function read_puzzle(path) {
 	var file = file_bin_open(path, 0)
-		show_debug_message(file)
-		var bomb_is = file_bin_seek(file, 4) //This val tells us if 07 is bomb or 07 is rock (08 is rock or 08 is bomb)
+		file_bin_seek(file, 4) //This val tells us if 07 is bomb or 07 is rock (08 is rock or 08 is bomb)
+		var bomb_is = file_bin_read_byte(file)
+		//show_debug_message(bomb_is)
 		var _bomb = (bomb_is == 1) ? BOMB : 8
 		file_bin_seek(file, 40);
 		var i = 0
@@ -31,6 +32,7 @@ function read_puzzle(path) {
 			i++
 		}
 	file_bin_close(file)
+	audio_play_sound(snd_butt_click,0,false)
 }
 
 

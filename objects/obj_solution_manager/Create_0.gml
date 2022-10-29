@@ -12,6 +12,7 @@ function reset_hover() {
 }
 
 function add_new_hint(arrow_coords_struct) {
+	
 	set_swap_mode = 0
 	var i1 = "i1" + string(arrow_coords_struct[$ "i1"])
 	var i2 = "i2" + string(arrow_coords_struct[$ "i2"])
@@ -21,6 +22,7 @@ function add_new_hint(arrow_coords_struct) {
 	if is_undefined(arrow_num_raw) {
 		show_message("Arrow positions are wrong or unsupported by the program.\nPlease try to have them next to each other")
 	} else {
+		audio_play_sound(snd_butt_click,0,false)
 		var hint_l = array_length(obj_butt_state.states_array[obj_butt_state.state_index]) //How many hints do we have?
 		if (current_hint_newswap >= hint_l) { //new hint
 			obj_butt_state.states_array[obj_butt_state.state_index][current_hint_newswap] = {"arrow_pos" : real(arrow_num_raw), "goto" : 0}

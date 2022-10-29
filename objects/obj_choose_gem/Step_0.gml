@@ -6,6 +6,7 @@ var y_end = y + GRID_SIZE/4
 if (mouse_x > x_start && mouse_x < x_end && mouse_y > y_start && mouse_y < y_end) {
 	var i = (mouse_x - x_start) div (GRID_SIZE/2)
 	if mouse_check_button_pressed(mb_left) {
+		audio_play_sound(snd_butt_click,0,false)
 		obj_gem_control.gem = i
 		instance_destroy()
 	}

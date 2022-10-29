@@ -26,6 +26,7 @@ function load_solution(path) {
 	}
 	obj_butt_state.state_index = obj_solution_manager.starting_state
 	file_bin_close(file)
+	audio_play_sound(snd_butt_click,0,false)
 }
 
 

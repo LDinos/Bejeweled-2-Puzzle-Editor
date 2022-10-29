@@ -20,7 +20,17 @@ for(var i = 0; i < 8; i++) for(var j = 0; j < 8; j++) {
 			draw_sprite_ext(spr_power, 0, _x, _y, 0.5, 0.5, rot2, c_white, alpha2)
 			gpu_set_blendmode(bm_normal)	
 		}
-		else if (_gem == BOMB) draw_text(_x, _y, _value)
+		else if (_gem == BOMB) {
+			draw_set_font(fnt_bomb)
+			var c = c_black
+			draw_text_color(_x-2, _y-2, _value, c,c,c,c, 1)
+			draw_text_color(_x-2, _y+2,_value, c,c,c,c, 1)
+			draw_text_color(_x+2, _y-2, _value, c,c,c,c, 1)
+			draw_text_color(_x+2, _y+2, _value, c,c,c,c, 1)
+			c = make_color_rgb(205, 253, 77)
+			draw_text_color(_x, _y, _value, c,c,c,c, 1)
+			draw_set_font(-1)
+		}
 	}
 }
 

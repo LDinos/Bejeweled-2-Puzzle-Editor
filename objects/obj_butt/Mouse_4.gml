@@ -1,5 +1,5 @@
 /// @description
-//obj_gem_control.gem_power = !obj_gem_control.gem_power
+audio_play_sound(snd_butt_click,0,false)
 
 
 

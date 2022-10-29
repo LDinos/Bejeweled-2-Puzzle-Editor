@@ -34,8 +34,10 @@ if (state != -1) {
 		
 		if mouse_check_button_pressed(mb_left) {
 			if (new_butt_hover) {
-				set_swap_mode = 1
-				current_hint_newswap = array_length(obj_butt_state.states_array[obj_butt_state.state_index])
+				if (l < 14) {
+					set_swap_mode = 1
+					current_hint_newswap = array_length(obj_butt_state.states_array[obj_butt_state.state_index])
+				} else show_message("For now only 14 hints are allowed per state!")
 			} else if hover != -1 {
 				if (butt_hover == 0) { //change arrow pos
 					set_swap_mode = 1
