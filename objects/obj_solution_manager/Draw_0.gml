@@ -24,17 +24,23 @@ if (hover != -1) {
 	}
 }
 if (state != -1) {
-	var l = array_length(obj_butt_state.states_array[state])	
-	for(var i = 0; i < l; i++) {
+	var l = array_length(obj_butt_state.states_array[state])	 //number of hints in this state
+	var i_real = 0
+	for(var i = page; i < page + max_hints_per_page; i++) {	
+		i_real = i - page //i iterrator without the page value
+		if (i == l) break;
 		var goto = obj_butt_state.states_array[state][i][$ "goto"]
 		var t1 = "Hint " + string(i+1) + ": " + string(obj_butt_state.states_array[state][i][$ "arrow_pos"])
 		var t2 = " | Go to state: " + string(goto)
 		if (goto == 0) t2 += " (Finish)"
-		draw_text(_x, _y + text_gap*i, t1 + t2)
-		draw_text(xend-40, _y + text_gap*i, "[-]")
+		draw_text(_x, _y + text_gap*i_real, t1 + t2)
+		draw_text(xend-40, _y + text_gap*i_real, "[-]")
 	}
-	draw_text(_x, _y + text_gap*i, "+ ADD NEW HINT +")
-	draw_text(_x, y + sprite_height - 24, "Starting state: " + string(starting_state+1))
+	if (i != page + max_hints_per_page) draw_text(_x, _y + text_gap*i_real, "+ ADD NEW HINT +")
+	
+	var info_y = y + sprite_height - 24
+	draw_sprite_ext(spr_pixel,0,_x-8,info_y-8, sprite_width-32, 16, 0, c_black, 0.6)
+	draw_text(_x, info_y, "Starting state: " + string(starting_state+1) + " |  Number of States: " + string(array_length(obj_butt_state.states_array)))
 }
 draw_set_halign(fa_center)
 
@@ -43,3 +49,8 @@ if (set_swap_mode > 0) {
 	draw_text(x, y + sprite_height/2, "Set hint arrow " + string(set_swap_mode))
 }
 
+if (hover != -1) {
+	if (butt_hover == 1) {
+		show_tooltip("LMB: Change goto | RMB: Go there", c_black, 0, 32)
+	}
+}

@@ -5,6 +5,26 @@ starting_state = 0
 set_swap_mode = 0 // 0 = no swap mode, 1 = set first swap, 2 = set second swap
 butt_hover = -1
 current_hint_newswap = 0 //used to see if we change swap positions or if we make a new hint swap position
+show_state_board = false
+max_hints_per_page = 10
+page = 0 //cant fit all hints, make pages
+
+function page_up() {
+	var state = obj_butt_state.state_index
+	if state == -1 return;
+
+	if (page > 0) page--
+
+}
+
+function page_down() {
+	var state = obj_butt_state.state_index
+	if state == -1 return;
+	var l = array_length(obj_butt_state.states_array[state])
+
+	if (l-page > (max_hints_per_page/2)) page++
+}
+
 function reset_hover() {
 	obj_board.hint_arrow = -1
 	butt_hover = -1

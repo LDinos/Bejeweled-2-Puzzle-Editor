@@ -1,6 +1,6 @@
 /// @description
 var _ystart = y + 16
-var _yend = y + sprite_height - 24
+var _yend = _ystart + text_gap*max_hints_per_page //y + sprite_height - 24
 var _xstart = x - (sprite_width/2) + 16
 var _xend = x + (sprite_width/2) - 16
 
@@ -15,8 +15,9 @@ var new_butt_hover = false
 hover = (mouse_y - _ystart) div text_gap
 if (state != -1) {
 	if (mouse_x > _xstart && mouse_x < _xend) && (mouse_y > _ystart && mouse_y < _yend) {
-		var l = array_length(obj_butt_state.states_array[state])	
-		if (hover < l) {
+		var l = array_length(obj_butt_state.states_array[state])
+		var hint_index = hover + page
+		if (hint_index < l) {
 			/* Horizontal hover */
 			var x_offset = mouse_x - _xstart
 			var alpha = x_offset / (_xend - _xstart)
@@ -24,9 +25,10 @@ if (state != -1) {
 			else if (alpha < buttalpha_state) butt_hover = 1
 			else if (alpha < buttalpha_delete) butt_hover = 2
 			else butt_hover = -1
-			var arrow_pos_raw = obj_butt_state.states_array[state][hover][$ "arrow_pos"]
+			var arrow_pos_raw = obj_butt_state.states_array[state][hint_index][$ "arrow_pos"]
 			obj_board.hint_arrow = obj_board.hint_swap_get_coords(arrow_pos_raw)
-		} else if (hover == l) {
+		} else if (hint_index == l) {
+			/* ADD NEW HINT hover */
 			butt_hover = -1
 			obj_board.hint_arrow = -1
 			new_butt_hover = true
@@ -34,10 +36,10 @@ if (state != -1) {
 		
 		if mouse_check_button_pressed(mb_left) {
 			if (new_butt_hover) {
-				if (l < 14) {
+				if (l < 255) {
 					set_swap_mode = 1
 					current_hint_newswap = array_length(obj_butt_state.states_array[obj_butt_state.state_index])
-				} else show_message("For now only 14 hints are allowed per state!")
+				} else show_message("You reached the maximum hint number of 255!")
 			} else if hover != -1 {
 				if (butt_hover == 0) { //change arrow pos
 					set_swap_mode = 1
@@ -45,13 +47,26 @@ if (state != -1) {
 				} else if (butt_hover == 1) { //change goto state
 					var goto = get_integer("Type goto state (0 = finish)", 0);
 					if is_real(goto) {
-						if (goto <= 255) obj_butt_state.states_array[state][hover][$ "goto"] = goto
+						if (goto <= 255) obj_butt_state.states_array[state][hint_index][$ "goto"] = goto
 					}
 				} else if (butt_hover == 2) { //delete hint
-					array_delete(obj_butt_state.states_array[state], hover, 1)
+					array_delete(obj_butt_state.states_array[state], hint_index, 1)
+					audio_play_sound(snd_butt_click2, 0, false)
 					reset_hover()
 				}
-				//get mouse_x position so that we can see if user wants to change swap arrow or goto.
+			}
+		}
+		
+		if mouse_check_button_pressed(mb_right) {
+			if (hover != -1) && (butt_hover == 1) {
+				var _id = obj_butt_state.states_array[state][hint_index][$ "goto"]
+				if (_id <= array_length(obj_butt_state.states_array)) && (_id > 0) {
+					obj_butt_state.state_index = _id - 1
+					page = 0
+					audio_play_sound(snd_butt_click, 0, false)
+				} else {
+					audio_play_sound(snd_butt_click2,0, false)
+				}
 			}
 		}
 	}

@@ -3,6 +3,7 @@ event_inherited()
 image_xscale = 1.5
 
 function save_puzzle(path) {
+	obj_path_string.puzzle_path = path
 	/* HEADER */
 	var buffer = buffer_create(1, buffer_grow, 1)
 	buffer_seek(buffer, buffer_seek_start, 0)

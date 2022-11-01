@@ -6,4 +6,3 @@ else instance_create_depth(x - GRID_SIZE*2.25, y - GRID_SIZE, depth, obj_choose_
 
 
 
-

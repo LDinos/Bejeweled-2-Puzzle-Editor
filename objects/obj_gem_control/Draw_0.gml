@@ -24,6 +24,9 @@ else if (gem_power) && (gem < 7) {
 }
 
 
+if position_meeting(mouse_x, mouse_y, id) {
+	show_tooltip("MWheel: countdown value | 0-9: Gem skin | MMB: Powered | RMB: Delete Gem", c_black, -128, 24)
+}
 
 
 

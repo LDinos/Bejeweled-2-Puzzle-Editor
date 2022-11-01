@@ -1,6 +1,10 @@
 /// @description
 mouse_i = (mouse_y - y) div GRID_SIZE //row
 mouse_j = (mouse_x - x) div GRID_SIZE //column
+
+var l = array_length(obj_butt_state.states_array)
+var _board = obj_solution_manager.show_state_board ? state_board[obj_butt_state.state_index] : board 
+
 if !is_out_of_board(mouse_i, mouse_j) {
 	var i = mouse_i
 	var j = mouse_j
@@ -24,34 +28,34 @@ if !is_out_of_board(mouse_i, mouse_j) {
 			var _gem = obj_gem_control.gem
 			var _power = obj_gem_control.gem_power
 			var _value = obj_gem_control.gem_value
-			if (board[i][j][$ "gem"] == EMPTY) {
-				board[i][j][$ "gem"] = _gem
-				board[i][j][$ "power"] = _power
-				board[i][j][$ "value"] = _value
+			if (_board[i][j][$ "gem"] == EMPTY) {
+				_board[i][j][$ "gem"] = _gem
+				_board[i][j][$ "power"] = _power
+				_board[i][j][$ "value"] = _value
 			}
 		}
 		else if mouse_check_button(mb_right) {
-			board[i][j][$ "gem"] = EMPTY
-			board[i][j][$ "power"] = 0
-			board[i][j][$ "value"] = 0
+			_board[i][j][$ "gem"] = EMPTY
+			_board[i][j][$ "power"] = 0
+			_board[i][j][$ "value"] = 0
 		}
 	
 		if mouse_wheel_up() {
-			if (board[i][j][$ "gem"] == BOMB) {
-				board[i][j][$ "value"]++
-				board[i][j][$ "value"] = clamp(board[i][j][$ "value"], 0, 255)
+			if (_board[i][j][$ "gem"] == BOMB) {
+				_board[i][j][$ "value"]++
+				_board[i][j][$ "value"] = clamp(_board[i][j][$ "value"], 0, 255)
 			}
 		}
 		else if mouse_wheel_down() {
-			if (board[i][j][$ "gem"] == BOMB) {
-				board[i][j][$ "value"]--
-				board[i][j][$ "value"] = clamp(board[i][j][$ "value"], 0, 255)
+			if (_board[i][j][$ "gem"] == BOMB) {
+				_board[i][j][$ "value"]--
+				_board[i][j][$ "value"] = clamp(_board[i][j][$ "value"], 0, 255)
 			}
 		}
 	
 		if mouse_check_button_pressed(mb_middle) {
-			if (board[i][j][$ "gem"] != EMPTY) && (board[i][j][$ "gem"] < 7) {
-				board[i][j][$ "power"] = !board[i][j][$ "power"]
+			if (_board[i][j][$ "gem"] != EMPTY) && (_board[i][j][$ "gem"] < 7) {
+				_board[i][j][$ "power"] = !_board[i][j][$ "power"]
 			}
 		}
 	}

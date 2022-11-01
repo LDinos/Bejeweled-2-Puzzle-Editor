@@ -3,7 +3,7 @@ event_inherited()
 image_xscale = 1.5
 
 function save_solution(path) {
-	
+	obj_path_string.solution_path = path
 	var states_l =  array_length(obj_butt_state.states_array)
 	var buffer = buffer_create(1, buffer_grow, 1)
 		/*Header .sol*/

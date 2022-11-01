@@ -14,5 +14,3 @@ if (mouse_x > x_start && mouse_x < x_end && mouse_y > y_start && mouse_y < y_end
 
 
 
-
-

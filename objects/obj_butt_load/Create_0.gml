@@ -3,6 +3,7 @@ event_inherited()
 image_xscale = 1.5
 
 function read_puzzle(path) {
+	obj_path_string.puzzle_path = path
 	var file = file_bin_open(path, 0)
 		file_bin_seek(file, 4) //This val tells us if 07 is bomb or 07 is rock (08 is rock or 08 is bomb)
 		var bomb_is = file_bin_read_byte(file)

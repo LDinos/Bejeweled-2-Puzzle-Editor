@@ -1,37 +1,17 @@
 /// @description
 var rot = -current_time / 50
 var rot2 = current_time / 10
+var board_alpha = obj_solution_manager.show_state_board ? 0.1 : 1
 var alpha = abs(sin(current_time / 650))
 var alpha2 = abs(cos(current_time / 650))
 var lerp_move = abs(sin(current_time / 150))
 
 draw_self()
-for(var i = 0; i < 8; i++) for(var j = 0; j < 8; j++) {
-	var _gem = board[i][j][$ "gem"]
-	var _power = board[i][j][$ "power"]
-	var _value = board[i][j][$ "value"]
-	var _x = x + j*GRID_SIZE + GRID_SIZE/2
-	var _y = y + i*GRID_SIZE + GRID_SIZE/2
-	if (_gem != EMPTY) {
-		draw_sprite(spr_gems, _gem, _x, _y)
-		if (_power) && (_gem < 7) {
-			gpu_set_blendmode(bm_add)
-			draw_sprite_ext(spr_power, 0, _x, _y, 0.5, 0.5, rot, c_white, alpha)
-			draw_sprite_ext(spr_power, 0, _x, _y, 0.5, 0.5, rot2, c_white, alpha2)
-			gpu_set_blendmode(bm_normal)	
-		}
-		else if (_gem == BOMB) {
-			draw_set_font(fnt_bomb)
-			var c = c_black
-			draw_text_color(_x-2, _y-2, _value, c,c,c,c, 1)
-			draw_text_color(_x-2, _y+2,_value, c,c,c,c, 1)
-			draw_text_color(_x+2, _y-2, _value, c,c,c,c, 1)
-			draw_text_color(_x+2, _y+2, _value, c,c,c,c, 1)
-			c = make_color_rgb(205, 253, 77)
-			draw_text_color(_x, _y, _value, c,c,c,c, 1)
-			draw_set_font(-1)
-		}
-	}
+draw_board(board, rot, rot2, alpha, alpha2, board_alpha)
+if (obj_solution_manager.show_state_board) {
+	draw_board(state_board[obj_butt_state.state_index], rot, rot2, alpha, alpha2, 1)
+	draw_text_outline(x + sprite_width/2 - GRID_SIZE/2, y+16, "STATE BOARD SIMULATION IS ON! (This is NOT the initial board)",
+	c_white,1,c_black,1)
 }
 
 if (hint_arrow != -1) {
